@@ -16,22 +16,26 @@ namespace CheckedRecycleViewApp1
 {
     public class PhotoAlbumAdapter: RecyclerView.Adapter
     {
-
         public event EventHandler<int> ItemClick;
-        public Photo[] mPhotoAlbum;
+        //public Photo[] mPhotoAlbum;
+        public static List<Photo> mPhotoAlbum = new List<Photo>();
+
+        public static RecyclerView.Adapter adapter;
 
         //AppCompatActivity activity;
         //private List<Photo> branchesList;
 
         public PhotoAlbumAdapter(List<Photo> branchesList)
         {
-            mPhotoAlbum = branchesList.ToArray();
+            //mPhotoAlbum = branchesList.ToArray();
+            adapter = this;
+            mPhotoAlbum = branchesList;
         }
 
-        public void UpDateData(Photo[] temp) {
-            mPhotoAlbum = temp;
-            NotifyDataSetChanged();
-        }
+        //public void UpDateData(Photo[] temp) {
+        //    mPhotoAlbum = temp;
+        //    NotifyDataSetChanged();
+        //}
 
         public override RecyclerView.ViewHolder OnCreateViewHolder(ViewGroup parent, int viewType)
         {
@@ -54,7 +58,31 @@ namespace CheckedRecycleViewApp1
             vh.MyCheckBox.SetOnCheckedChangeListener(new MyListener(item));
             vh.MyCheckBox.Checked = item.isChecked;
 
+            vh.DeleteButton.SetOnClickListener(new MyRemoveItem(item,position));
+
         }
+
+
+        class MyRemoveItem : Java.Lang.Object, View.IOnClickListener
+        {
+            Photo photo;
+            int position;
+            public MyRemoveItem(Photo item,int position) {
+                this.photo = item;
+                this.position = position;
+            }
+
+            public void OnClick(View v)
+            {
+                //mPhotoAlbum
+
+                mPhotoAlbum.Remove(photo);
+
+                adapter.NotifyDataSetChanged();
+            }
+        }
+
+
 
         class MyListener : Java.Lang.Object, CompoundButton.IOnCheckedChangeListener
         {
@@ -73,7 +101,8 @@ namespace CheckedRecycleViewApp1
 
         public override int ItemCount
         {
-            get { return mPhotoAlbum.Length; }
+            //get { return mPhotoAlbum.Length; }
+            get { return mPhotoAlbum.Count; }
         }
 
         // Raise an event when the item-click takes place:

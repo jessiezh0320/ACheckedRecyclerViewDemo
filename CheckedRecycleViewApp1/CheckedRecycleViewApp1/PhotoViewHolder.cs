@@ -20,11 +20,16 @@ namespace CheckedRecycleViewApp1
         public CheckBox MyCheckBox { get; set; }
         public bool IsChecked { get; set; }
 
+
+        public Button DeleteButton { get; set; }
+
         public PhotoViewHolder(View itemView, Action<int> listener) : base(itemView)
         {
             //Image = itemView.FindViewById<ImageView> (Resource.Id.imageView);
             Caption = itemView.FindViewById<TextView>(Resource.Id.textView);
             MyCheckBox = itemView.FindViewById<CheckBox>(Resource.Id.myCheckBox);
+
+            DeleteButton = itemView.FindViewById<Button>(Resource.Id.deleteBtn);
 
             // Detect user clicks on the item view and report which item
             // was clicked (by layout position) to the listener:
@@ -43,6 +48,11 @@ namespace CheckedRecycleViewApp1
                     IsChecked = false;
                 }
             };
+
+            //DeleteButton.Click += delegate { 
+             
+            
+            //};
 
         }
     }

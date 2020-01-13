@@ -45,6 +45,8 @@ namespace CheckedRecycleViewApp1
             mAdapter.ItemClick += OnItemClick;
             mRecyclerView.SetAdapter(mAdapter);
 
+            
+
 
 
             searchViewBranch = FindViewById<EditText>(Resource.Id.searchView1);
@@ -80,7 +82,7 @@ namespace CheckedRecycleViewApp1
 
         //private List<Photo> FindInsideList(string text)
         private void FindInsideList(string text)
-        {
+        {/*
             if (text != null && text.Length > 0)
             {
                 List<Photo> filteredList = new List<Photo>();
@@ -101,7 +103,7 @@ namespace CheckedRecycleViewApp1
             else
             {
                 mAdapter.UpDateData(loadBranch.ToArray());
-            }
+            }*/
         }
 
 
